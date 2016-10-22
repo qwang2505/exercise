@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
+#include "../basic/util.h"
 
 using namespace std;
 
@@ -68,9 +70,12 @@ int main(int argc, char** argv)
     vector<int> array(a, a + sizeof(a)/sizeof(a[0]));
     // 传递引用，以便在内部修改
     sort(array, 0, array.size() - 1);
-    for (int i=0; i < array.size(); i++)
-    {
-        cout << array[i] << "->";
-    }
-    cout << endl;
+    print(array);
+
+    vector<int> input;
+    randomVector(input, 20000000);
+    long start = getTime();
+    cout << "start sort" << endl;
+    sort(input, 0, input.size() - 1);
+    cout << "spend: " << getTime() - start << "ms." << endl;
 }

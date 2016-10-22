@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "../basic/util.h"
 
 using namespace std;
 
@@ -33,9 +34,5 @@ int main(int argc, char** argv)
     int a[] = {5,3,7,91,2,3,1,10,17};
     vector<int> array(a, a + sizeof(a) / sizeof(a[0]));
     sort(array);
-    for (int i=0; i < array.size(); i++)
-    {
-        cout << array[i] << "->";
-    }
-    cout << endl;
+    print(array);
 }

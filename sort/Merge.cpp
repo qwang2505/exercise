@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "../basic/util.h"
 
 using namespace std;
 
@@ -56,9 +57,13 @@ int main(int argc, char** argv)
     vector<int> aux(input.size(), -1);
     // 需要辅助vector来进行合并
     sort(input, 0, input.size() - 1, aux);
-    for (int i=0; i < input.size(); i++)
-    {
-        cout << input[i] << "->";
-    }
-    cout << endl;
+    print(input);
+
+    vector<int> array;
+    randomVector(array, 20000000);
+    vector<int> aux2(array.size(), -1);
+    long start = getTime();
+    cout << "start merge sort..." << endl;
+    sort(array, 0, array.size() - 1, aux2);
+    cout << "spend: " << getTime() - start << "ms." << endl;
 }
