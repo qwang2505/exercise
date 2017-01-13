@@ -6,6 +6,8 @@
 #include <map>
 #include <limits>
 #include <algorithm>
+#include <string>
+#include <sstream>
 
 #include <stdlib.h>
 #include <time.h>

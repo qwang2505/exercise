@@ -1,7 +1,8 @@
 #include "../include.h"
 
 /**
- * Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+ * Given an array of size n, find the majority element. The majority element is the 
+ * element that appears more than ⌊ n/2 ⌋ times.
  *
  * You may assume that the array is non-empty and the majority element always exist in the array.
  */
@@ -62,10 +63,24 @@ int findByDivideAndConquer(vector<int>& nums, int left, int right) {
     return count(nums.begin() + left, nums.begin() + right + 1, lm) > count(nums.begin() + left, nums.begin() + right + 1, rm) ? lm : rm;
 }
 
+// 很trick的解法，理解了就不容易了，等做的題目多了也許會多一些想法。
+// 可以多想想，看能不能應用到其他問題的解決中。
 int findByMooreVotingAlgorithm(vector<int>& nums) {
-    return 0;
+    int major, count = 0;
+    for (int i=0; i < nums.size(); i++) {
+        if (!count) {
+            major = nums[i];
+        } else {
+            count += nums[i] == major ? 1 : -1;
+        }
+    }
+    return major;
 }
 
+// TODO 需要好好想想，完全不理解
+int findByBitManipulation(vector<int>& nums) {
+    return 0;
+}
 
 int majorityElement(vector<int>& nums) {
     //return findByHashTable(nums);
