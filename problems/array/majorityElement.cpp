@@ -77,9 +77,21 @@ int findByMooreVotingAlgorithm(vector<int>& nums) {
     return major;
 }
 
-// TODO 需要好好想想，完全不理解
+// 按位来找majority element. 找到每一位出现最多的值(0或1)，再将位合并，即得到最终的majority
 int findByBitManipulation(vector<int>& nums) {
-    return 0;
+    int major = 0;
+    int n = nums.size();
+    for (int i=0, mask = 1; i < 32; i++, mask <<= 1) {
+        int bitCount = 0;
+        for (int j=0; j < n; j++) {
+            bitCount += mask & nums[j];
+            if (bitCount > n/2) {
+                major |= mask;
+                break;
+            }
+        }
+    }
+    return major;
 }
 
 int majorityElement(vector<int>& nums) {
@@ -87,7 +99,8 @@ int majorityElement(vector<int>& nums) {
     //return findBySort(nums);
     //return findByRandom(nums);
     //return findByDivideAndConquer(nums, 0, nums.size()-1);
-    return findByMooreVotingAlgorithm(nums);
+    //return findByMooreVotingAlgorithm(nums);
+    return findByBitManipulation(nums);
 }
 
 int main(int argc, char** argv) {

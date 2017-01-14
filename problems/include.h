@@ -26,6 +26,22 @@ inline void printVector(vector<T>& input) {
     cout << "]" << endl;
 }
 
+template <typename T>
+inline void printVector(vector<vector<T> >& input) {
+    cout << "[" << endl;
+    for (int j=0; j < input.size(); j++) {
+        cout << "\t[";
+        for (int i=0; i < input[j].size(); i++) {
+            cout << input[j][i];
+            if (i != input[j].size() - 1) {
+                cout << ", ";
+            }
+        }
+        cout << "]," << endl;
+    }
+    cout << "]" << endl;
+}
+
 inline int random(int start, int end) {
     srand(time(NULL));
     if (end < start) {
