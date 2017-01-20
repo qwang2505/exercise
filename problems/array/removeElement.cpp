@@ -18,7 +18,6 @@
  * 3. What happens when the elements to remove are rare?
  */
 
-
 int naiveSolution(vector<int>& nums, int val) {
     int n = nums.size();
     int slow = 0, fast = 0;
@@ -36,7 +35,6 @@ int naiveSolution(vector<int>& nums, int val) {
 int removeElement(vector<int>& nums, int val) {
     return naiveSolution(nums, val);
 }
-
 
 int main(int argc, char** argv) {
     int a[] = {3,2,2,3};
