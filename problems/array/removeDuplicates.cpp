@@ -15,6 +15,8 @@
  * beyond the new length.
  */
 
+// 需要注意的是slow和fast各自的含义以及作用，一定要注意指向的内容的含义，
+// 这样在操作/移动中才能保证不出现错误
 int removeDuplicates(vector<int>& nums) {
     if (nums.size() < 2) {
         return nums.size();

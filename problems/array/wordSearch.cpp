@@ -20,6 +20,8 @@
  * word = "ABCB", -> returns false.
  */
 
+// 注意考虑这个算法中的几种情况，类似的题目的多种情况的考虑肯定会出问题的，
+// 一定要形成一种惯性的思维方式，全面考虑各种可能的问题
 bool found(vector<vector<char> >& board, int i, int j, string word, int m, int n, vector<vector<bool> >& searchMap) {
     if (word.length() == 0) {
         return true;
