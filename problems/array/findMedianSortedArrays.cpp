@@ -19,9 +19,6 @@
  * The median is (2 + 3)/2 = 2.5
  */
 
-// TODO 有时间需要再看这个题目的其他解法，时间复杂度可以优化到O(log(min(m, n)))
-
-
 // 比较容易想到的解法，理解起来很容易，就是合并两个数组，找到中间位置的
 // 元素，再求中位数。注意实现起来还是需要注意一些细节部分的，比如下面实现
 // 中count的作用，如何保存中间位置的值，等等。这种解法的时间复杂度是O(n),
@@ -66,8 +63,60 @@ double findByTwoPointers(vector<int>& nums1, vector<int>& nums2) {
     return l % 2 == 0 ? (first + second) / 2 : first;
 }
 
+// 整体思路比较好理解，但是细节部分的处理很多，需要注意
+// 最好能遇到的话从头进行一个分析
+// 类似的问题注意参考这里的做法
+double findByBinarySearch(vector<int>& nums1, vector<int>& nums2) {
+    int m = nums1.size(), n = nums2.size();
+    // 确保nums2是更大的一个，这样算出来的j才不会是负数
+    if (m > n) {
+        return findByBinarySearch(nums2, nums1);
+    }
+    if (n == 0) {
+        // 两个数组均为空
+        return 0.0;
+    }
+    // 注意这里的high=m，而不是m-1
+    int low = 0, high = m;
+    int i, j;
+    while (low <= high) {
+        i = low + (high - low) / 2;
+        j = (m + n + 1) / 2 - i;
+        // 因为i和j之间存在上述关系，所以如果i<m的情况下，j一定大于0.
+        // 第二个else的条件也是类似的
+        if (i < m && nums2[j-1] > nums1[i]) {
+            low = i + 1;
+        } else if (i > 0 && nums1[i-1] > nums2[j]) {
+            high = i - 1;
+        } else {
+            int maxLeft, minRight;
+            if (i == 0) {
+                maxLeft = nums2[j-1];
+            } else if (j == 0) {
+                maxLeft = nums1[i-1];
+            } else {
+                maxLeft = nums1[i-1] > nums2[j-1] ? nums1[i-1] : nums2[j-1];
+            }
+            if ((m + n) % 2 == 1) {
+                return maxLeft;
+            }
+            if (i == m) {
+                minRight = nums2[j];
+            } else if (j == n) {
+                minRight = nums1[i];
+            } else {
+                minRight = nums1[i] < nums2[j] ? nums1[i] : nums2[j];
+            }
+            return (maxLeft + minRight) / 2.0;
+        }
+    }
+    // 不会运行到这里的
+    return 0.0;
+}
+
 double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-    return findByTwoPointers(nums1, nums2);
+    //return findByTwoPointers(nums1, nums2);
+    return findByBinarySearch(nums1, nums2);
 }
 
 int main(int argc, char** argv) {
